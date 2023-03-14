@@ -1,4 +1,4 @@
-# BrianTU's Modules
+# BrianTU's HogMagic
 
 This is a collection of modules for [Ministry of Mods](https://github.com/meta-hub/ministry-of-mods) written by BrianTU#0001
 
