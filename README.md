@@ -16,16 +16,14 @@ To install these modules, simply
 ```
 
 # LICENSE
-**You may**
-- copy, use, modify and rename these resources.
+You may use, copy, modify, and rename these resources as long as you comply with the following terms:
 
-**You may not**
-- sell or commercialize these modules
-- pack or include these modules in an installer or a project with intent to distribute
-- rip or copy code into your own project and claim it as your own
+- You may not sell or commercialize these modules.
+- You may not pack or include these modules in an installer or a project with intent to distribute.
+- You may not rip or copy code into your own project and claim it as your own.
+- You must include the module's readme at all times.
 
-**You must**
-- include the modules readme at all times.
+THE MODULES ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE MODULES OR THE USE OR OTHER DEALINGS IN THE MODULES.
 
 # ADDITIONAL
 
