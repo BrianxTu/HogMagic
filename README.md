@@ -16,6 +16,7 @@ To install these modules, simply
 ```
 
 # LICENSE
+
 You may use, copy, modify, and rename these resources as long as you comply with the following terms:
 
 - You may not sell or commercialize these modules.

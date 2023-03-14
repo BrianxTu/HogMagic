@@ -230,11 +230,3 @@ RegisterForEvent("shutdown", onShutdown)
 
 -- Exports
 Exports("registerCommand", registerCommand)
-
-Exports("getPlayerData", function(player)
-    if player then
-        return playerData[player.connection]
-    else
-        return playerData
-    end
-end)
