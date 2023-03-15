@@ -1,5 +1,4 @@
 -- Setup
-local serverMSG = "</><gryffindor>[SERVER]: </><default>"
 local DATA_FILE = "/data/playerdata.json"
 local registeredCommands = {}
 playerData = {}
@@ -114,7 +113,7 @@ local function onCommand(player, cmdName, args)
     local cmd = registeredCommands[cmdName:lower()]
     if cmd.permissions then
         if not checkPerm(player, cmd.permissions) then
-            player:SendSystemMessage(serverMSG .. "You don't have permission to use this command!")
+            player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Core.lack_perm))
             return
         end
     end
@@ -141,13 +140,13 @@ local function onJoin(player)
     loadPlayerData(player)
     if whitelistMode then
         if not playerData[player.connection].whitelisted then
-            player:SendSystemMessage(serverMSG .. "You are not whitelisted for access")
+            player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Core.con_whitelist))
             player:Kick()
             return
         end
     end
     if playerData[player.connection].banned then
-        player:SendSystemMessage(serverMSG .. "You are banned from the server for " .. (playerData[player.connection].banreason or "unknown"))
+        player:SendSystemMessage(string.format(Locale.Core.systemtag, string.format(Locale.Core.ban_context,(playerData[player.connection].banreason or Locale.Core.banreason_desc))))
         player:Kick()
         return
     end
@@ -155,7 +154,7 @@ local function onJoin(player)
         for pConId in pairs(playerData) do
             local getPlayer = server.player_manager:GetByConnectionId(pConId)
             if getPlayer ~= player then
-                getPlayer:SendSystemMessage(serverMSG .. player.name .. " has joined!")
+                getPlayer:SendSystemMessage(string.format(Locale.Core.systemtag, string.format(Locale.Core.joined, player.name)))
             end
         end
     end
@@ -167,7 +166,7 @@ local function onLeave(player)
         for pConId in pairs(playerData) do
             local getPlayer = server.player_manager:GetByConnectionId(pConId)
             if getPlayer ~= player then
-                getPlayer:SendSystemMessage(serverMSG .. player.name .. " has left!")
+                getPlayer:SendSystemMessage(string.format(Locale.Core.systemtag, string.format(Locale.Core.left, player.name)))
             end
         end
     end
@@ -192,7 +191,7 @@ local function onChat(player, message)
                     if isWhitelisted then break end
                 end
                 if not isWhitelisted then
-                    player:SendSystemMessage(serverMSG .. "Stop saying that >:c")
+                    player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Core.profanity_warn))
                     return true
                 end
             end
@@ -206,7 +205,7 @@ local function onChat(player, message)
         table.remove(args, 1)
         local cmd = registeredCommands[cmdName:lower()]
         if not cmd then
-            player:SendSystemMessage(serverMSG .. "Invalid command")
+            player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Core.invalid_com))
             return true
         end
         onCommand(player, cmdName, args)
@@ -216,10 +215,25 @@ end
 
 local function onShutdown()
     for i,v in pairs(playerData) do
-        print("saving data for " .. i)
         local fakePlayer = {connection = i}
         savePlayerData(fakePlayer)
         table.remove(playerData, i)
+    end
+end
+
+local tipSync = 0
+local function onUpdate(Delta)
+    tipSync = tipSync+Delta
+    if tipSync > Config.SystemTips.TipSync then
+        tipSync = tipSync - Config.SystemTips.TipSync
+        for pConId in pairs(playerData) do
+            local messageIndex = math.random(1, #Locale.SystemTips)
+            local message = Locale.SystemTips[messageIndex]
+            local getPlayer = server.player_manager:GetByConnectionId(pConId)
+            if getPlayer then
+                getPlayer:SendSystemMessage(string.format(Locale.Core.tiptag, message))
+            end
+        end
     end
 end
 -- Events
@@ -227,6 +241,7 @@ RegisterForEvent("player_joined", onJoin)
 RegisterForEvent("player_left", onLeave)
 RegisterForEvent("player_chat", onChat)
 RegisterForEvent("shutdown", onShutdown)
+RegisterForEvent("update", onUpdate)
 
 -- Exports
 Exports("registerCommand", registerCommand)

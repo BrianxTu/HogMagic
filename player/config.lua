@@ -16,3 +16,7 @@ Config.Privileged = {
     {discord = 151507543657545728, permissions = {"mod", "admin", "god"}}
 }
 
+Config.SystemTips = {
+    Enabled = true,
+    TipSync = 300 -- Every 300 Seconds
+}

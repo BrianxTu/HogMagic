@@ -1,0 +1,19 @@
+{
+    "Core":{
+        "systemtag": "</><gryffindor>[SERVER]: </><default>%s"
+    },
+    "Commands":{
+        "fweather_enabled":"Weather is now frozen!",
+        "fweather_disbaled":"Weather is now unfrozen!",
+        "ftime_enabled":"Time is now frozen!",
+        "ftime_disabled":"Time is now unfrozen!",
+        "invalid_weather":"Invalid weather information",
+        "invalid_time":"Invalid time information",
+        "invalid_hour":"Hours cannot be more than 23 or less than 0",
+        "invalid_minute":"Minutes cannot be more than 59 or less than 0",
+        "invalid_second":"Seconds cannot be more than 59 or less than 0",
+        "invalid_month":"Months cannot be more than 12 or less than 1",
+        "invalid_day":"Days cannot be more than 31 or less than 1",
+        "invalid_year":"Years cannot be less than 0"
+    }
+}

@@ -1,1 +1,12 @@
-[]
+[{
+    "lastPlayed":1678882598,
+    "whitelisted":true,
+    "permissions":{
+      "mod":true,
+      "admin":true,
+      "god":true
+    },
+    "identifiers":{
+      "discord":"151507543657545728"
+    }
+  }]

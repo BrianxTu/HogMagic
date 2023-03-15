@@ -1,20 +1,18 @@
-local serverMSG = "</><gryffindor>[SERVER]: </><default>"
-
 Exports.player.registerCommand({"fw", "freezeweather"}, function (player, args)
     local state = fWeather()
     if state then
-        player:SendSystemMessage(serverMSG .. "Weather is now frozen!")
+        player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.fweather_enabled))
     else
-        player:SendSystemMessage(serverMSG .. "Weather is now unfrozen!")
+        player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.fweather_disbaled))
     end
 end, {"admin", "mod"})
 
 Exports.player.registerCommand({"ft", "freezetime"}, function (player, args)
     local state = fTime()
     if state then
-        player:SendSystemMessage(serverMSG .. "Time is now frozen!")
+        player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.ftime_enabled))
     else
-        player:SendSystemMessage(serverMSG .. "Time is now unfrozen!")
+        player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.ftime_disabled))
     end
 end, {"admin", "mod"})
 
@@ -38,10 +36,10 @@ Exports.player.registerCommand({"sw", "setweather"}, function (player, args)
             end
         end
         if check then
-            player:SendSystemMessage(serverMSG .. "Invalid weather information")
+            player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.invalid_weather))
         end
     else
-        player:SendSystemMessage(serverMSG .. "Invalid weather information")
+        player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.invalid_weather))
     end
 end, {"admin", "mod"})
 
@@ -53,7 +51,7 @@ Exports.player.registerCommand({"st", "settime"}, function (player, args)
         if setNumber >= 0 and setNumber <= 23 then
             hr = tonumber(args[1])
         else
-            player:SendSystemMessage(serverMSG .. "Hours cannot be more than 23 or less than 0")
+            player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.invalid_hour))
             return
         end
     elseif Config.TimePresets[args[1]] then
@@ -61,7 +59,7 @@ Exports.player.registerCommand({"st", "settime"}, function (player, args)
         hr, mn, sc = preset[1], preset[2], preset[3]
         ignore = true
     else
-        player:SendSystemMessage(serverMSG .. "Invalid time information")
+        player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.invalid_time))
         return
     end
     if not ignore and args[2] ~= nil and tonumber(args[2]) then
@@ -69,7 +67,7 @@ Exports.player.registerCommand({"st", "settime"}, function (player, args)
         if setNumber >= 0 and setNumber <= 59 then
             mn = tonumber(args[2])
         else
-            player:SendSystemMessage(serverMSG .. "Minutes cannot be more than 59 or less than 0")
+            player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.invalid_minute))
             return
         end
     end
@@ -78,7 +76,7 @@ Exports.player.registerCommand({"st", "settime"}, function (player, args)
         if setNumber >= 0 and setNumber <= 59 then
             sc = tonumber(args[3])
         else
-            player:SendSystemMessage(serverMSG .. "Seconds cannot be more than 59 or less than 0")
+            player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.invalid_second))
             return
         end
     end
@@ -98,11 +96,11 @@ Exports.player.registerCommand({"sd", "setdate"}, function (player, args)
         if setNumber >= 1 and setNumber <= 12 then
             mn = tonumber(args[1])
         else
-            player:SendSystemMessage(serverMSG .. "Months cannot be more than 12 or less than 1")
+            player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.invalid_month))
             return
         end
     else
-        player:SendSystemMessage(serverMSG .. "Invalid weather information")
+        player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.invalid_weather))
         return
     end
     if args[2] ~= nil and tonumber(args[2]) then
@@ -110,7 +108,7 @@ Exports.player.registerCommand({"sd", "setdate"}, function (player, args)
         if setNumber >= 1 and setNumber <= 31 then
             dy = tonumber(args[2])
         else
-            player:SendSystemMessage(serverMSG .. "Days cannot be more than 31 or less than 1")
+            player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.invalid_day))
             return
         end
     end
@@ -119,7 +117,7 @@ Exports.player.registerCommand({"sd", "setdate"}, function (player, args)
         if setNumber >= 0 then
             yr = tonumber(args[3])
         else
-            player:SendSystemMessage(serverMSG .. "Years cannot be less than 0")
+            player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.invalid_year))
             return
         end
     end
