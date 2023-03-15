@@ -13,6 +13,7 @@ To install these modules, simply
     {"name":"player"},
     {"name":"world"},
     {"name":"npc"}
+    {"name":"test_race"}
 ]
 ```
 
