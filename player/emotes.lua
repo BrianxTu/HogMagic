@@ -29,7 +29,7 @@ local emotes = {
 }
 
 registerCommand({"e", "emote"}, function (player, args)
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         player:RpcSetAnimation("")
         return
     end

@@ -1,5 +1,5 @@
 Exports.player.registerCommand("startrace", function(player, args)
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         player:SendSystemMessage("Provide a race name!")
         return
     end
@@ -34,7 +34,7 @@ Exports.player.registerCommand("startrace", function(player, args)
 end)
 
 Exports.player.registerCommand("joinrace", function(player, args)
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         player:SendSystemMessage("Provide a race name!")
         return
     end
