@@ -34,7 +34,9 @@
         "perm_add_executor":"%s has received the permission %s",
         "perm_add_target":"You have received the permission %s",
         "perm_remove_executor":"%s has lost the permission %s",
-        "perm_remove_target":"You have lost the permission %s"
+        "perm_remove_target":"You have lost the permission %s",
+        "help_header":"</><gryffindor>HELP:</><server> available commands"
+
     },
     "SystemTips":[
         "BrianTU's HogMagic... A muggles magic",

@@ -18,6 +18,7 @@ Exports.player.registerCommand("startrace", function(player, args)
                 startdelay = validRace.startdelay,
                 maxtime = validRace.maxtime,
                 maxdistance = validRace.maxdistance,
+                startingalert = validRace.startingalert,
                 racers = {player},
                 checkpoints = validRace.checkpoints,
                 progress = {[player.connection] = 1},

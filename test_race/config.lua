@@ -5,6 +5,7 @@ Config.RaceSetup = {
         startdelay = 30, -- seconds till start
         maxtime = 120, -- seconds
         maxdistance = 10,
+        startingalert = {20,10,5,4,3,2,1},
 		checkpoints = {
 			[1] = {337731,-474499,-86083},
 			[2] = {333514,-478761,-86616},

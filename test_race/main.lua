@@ -13,8 +13,12 @@ local function onUpdate(Delta)
                         racer:SendSystemMessage("The race has started!")
                     end
                 else
-                    for _, racer in ipairs(data.racers) do
-                        racer:SendSystemMessage("Race starting in " .. tostring(math.ceil(data.startdelay)) .. " seconds...")
+                    for _, alert in pairs(data.startingalert) do
+                        if alert == data.startdelay then
+                            for _, racer in ipairs(data.racers) do
+                                racer:SendSystemMessage("Race starting in " .. tostring(math.ceil(data.startdelay)) .. " seconds...")
+                            end
+                        end
                     end
                 end
             end
@@ -23,7 +27,6 @@ local function onUpdate(Delta)
     for raceName, data in pairs(RaceData) do
         if data.startdelay <= 0 then
             data.maxtime =  data.maxtime - Delta
-            print(data.maxtime)
             for i, racer in ipairs(data.racers) do
                 local currentPosition = racer.time_point.movement.position
                 local playerPos = {currentPosition.x, currentPosition.y, currentPosition.z}

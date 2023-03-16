@@ -1,12 +1,12 @@
 [{
-    "whitelisted":true,
+    "lastPlayed":1678951291,
     "identifiers":{
       "discord":"151507543657545728"
     },
-    "lastPlayed":1678898986,
+    "whitelisted":true,
     "permissions":{
-      "mod":true,
       "admin":true,
-      "god":true
+      "god":true,
+      "mod":true
     }
   }]

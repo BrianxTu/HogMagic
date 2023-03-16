@@ -1,6 +1,6 @@
 -- Setup
 local DATA_FILE = "/data/playerdata.json"
-local registeredCommands = {}
+registeredCommands = {}
 playerData = {}
 whitelistMode, whitelistTempTable = Config.WhitelistMode, {}
 

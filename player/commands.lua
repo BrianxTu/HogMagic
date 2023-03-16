@@ -185,3 +185,27 @@ registerCommand({"setp", "setpermission"}, function(player, args)
         player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.invalid_function))
     end
 end, {"admin", "mod"})
+
+registerCommand("help", function (player, args)
+    local pData = playerData[player.connection]
+    local pPermissions = pData.permissions
+    local buildHelp = {}
+    local finalBuildHelp = {Locale.Commands.help_header}
+    local buildHelpSet = {}
+
+    for cmdName, data in pairs(registeredCommands) do
+        if data.permissions then
+            for i,v in pairs(data.permissions) do
+                if pPermissions[v] and not buildHelpSet[cmdName] then
+                    table.insert(buildHelp, cmdName)
+                    buildHelpSet[cmdName] = true
+                end
+            end
+        elseif not buildHelpSet[cmdName] then
+            table.insert(buildHelp, cmdName)
+            buildHelpSet[cmdName] = true
+        end
+    end
+    table.insert(finalBuildHelp, table.concat(buildHelp, ", "))
+    player:SendSystemMessage(table.concat(finalBuildHelp, "</>\n<server>"))
+end)
