@@ -9,14 +9,11 @@ function CreatePed(gender, gear, features, house, spawnPos)
     Ped.gender = gender
     Ped.house = house
 
-    local time_point = Ped.time_point
-    local movement = time_point.movement
+    local movement = Ped.time_point.movement
     movement.position.x = spawnPos.x
     movement.position.y = spawnPos.y
     movement.position.z = spawnPos.z
     movement.speed = 0
-    time_point.movement = movement
-    Ped.time_point = time_point
 
     local item = GearItem.new()
     local setGear = Ped.gear
@@ -24,7 +21,6 @@ function CreatePed(gender, gear, features, house, spawnPos)
         item.id = v
         setGear:add(item)
     end
-    Ped.gear = setGear
 
     local preset = AvatarPreset.new()
     local presets = Ped.presets
@@ -32,7 +28,6 @@ function CreatePed(gender, gear, features, house, spawnPos)
         preset.name = v
         presets:add(preset)
     end
-    Ped.presets = presets
 
     server.npc_manager:Spawn(Ped)
     table.insert(Peds, Ped)

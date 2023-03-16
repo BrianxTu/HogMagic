@@ -14,7 +14,7 @@ local function findPlayer(target)
 end
 
 registerCommand("kick", function(player, args)
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.provide_target))
         return
     end
@@ -24,7 +24,7 @@ registerCommand("kick", function(player, args)
         return
     end
     table.remove(args, 1)
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.provide_reason))
         return
     end
@@ -38,7 +38,7 @@ registerCommand("kick", function(player, args)
 end, {"admin", "mod"})
 
 registerCommand("ban", function(player, args)
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.provide_target))
         return
     end
@@ -48,7 +48,7 @@ registerCommand("ban", function(player, args)
         return
     end
     table.remove(args, 1)
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.provide_reason))
         return
     end
@@ -65,7 +65,7 @@ end, {"admin", "mod"})
 
 registerCommand("getpos", function(player, args)
     local target
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         target = player
     else
         target = findPlayer(args[1])
@@ -78,7 +78,7 @@ registerCommand("getpos", function(player, args)
 end, {"admin", "mod"})
 
 registerCommand({"pm", "dm", "whisper"}, function (player, args)
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.provide_target))
         return
     end
@@ -88,7 +88,7 @@ registerCommand({"pm", "dm", "whisper"}, function (player, args)
         return
     end
     table.remove(args, 1)
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.provide_message))
         return
     end
@@ -105,7 +105,7 @@ registerCommand({"dc", "quit"}, function (player, args)
 end)
 
 registerCommand("announce", function(player, args)
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.provide_message))
         return
     end
@@ -119,13 +119,13 @@ registerCommand("announce", function(player, args)
 end, {"admin", "mod"})
 
 registerCommand({"wl", "whitelist"}, function(player, args)
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.provide_function))
         return
     end
     local func = args[1]
     table.remove(args, 1)
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.provide_target))
         return
     end
@@ -154,7 +154,7 @@ registerCommand({"wl", "whitelist"}, function(player, args)
 end, {"admin", "mod"})
 
 registerCommand({"setp", "setpermission"}, function(player, args)
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.provide_target))
         return
     end
@@ -164,7 +164,7 @@ registerCommand({"setp", "setpermission"}, function(player, args)
         player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.invalid_target))
         return
     end
-    if args == {} or args[1] == nil then
+    if #args == 0 or args[1] == nil then
         player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Commands.provide_function))
         return
     end
