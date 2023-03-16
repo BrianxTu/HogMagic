@@ -20,3 +20,7 @@ To install these modules, simply
 ## ADDITIONAL
 
 Your alterations to the modules are your own, however if you wish to submit a PR to this project, its subject to my approval.
+
+## CREDITS
+
+Thanks to **WindWakerX** (InternalErrorX#6942 <@442214351647014912>) for the current emote list.
