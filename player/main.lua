@@ -114,10 +114,11 @@ local function onCommand(player, cmdName, args)
     if cmd.permissions then
         if not checkPerm(player, cmd.permissions) then
             player:SendSystemMessage(string.format(Locale.Core.systemtag, Locale.Core.lack_perm))
-            return
+            return true
         end
     end
     cmd.callback(player, args)
+    return true
 end
 
 function registerCommand(cmdNames, callback, permissions)
