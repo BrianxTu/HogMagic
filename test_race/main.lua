@@ -11,6 +11,7 @@ local function onUpdate(Delta)
                 if data.startdelay <= 0 then
                     for _, racer in ipairs(data.racers) do
                         racer:SendSystemMessage("The race has started!")
+                        data.starttime = os.time()
                     end
                 else
                     for _, alert in pairs(data.startingalert) do
@@ -36,6 +37,7 @@ local function onUpdate(Delta)
                     if data.progress[racer.connection] == #data.checkpoints then
                         table.insert(data.finished, racer)
                         table.remove(data.racers, i)
+                        data.progress[racer.connection] = os.time()
                         racer:SendSystemMessage("You finished the race!")
                     else
                         racer:SendSystemMessage("Checkpoint " .. tostring(data.progress[racer.connection]) .. " reached!")
@@ -49,7 +51,12 @@ local function onUpdate(Delta)
                 end
                 local buildMessage = {string.format("</><hufflepuff>Results for %s:", raceName)}
                 for i, racer in ipairs(data.finished) do
-                    table.insert(buildMessage, "["..i.."] "..racer.name)
+                    local elapsed_time = data.progress[racer.connection] - data.starttime
+                    local hours = math.floor(elapsed_time / 3600)
+                    local minutes = math.floor((elapsed_time % 3600) / 60)
+                    local seconds = elapsed_time % 60
+                    local formatted_time = string.format("%02d:%02d:%02d", hours, minutes, seconds)
+                    table.insert(buildMessage, "["..i.."] "..racer.name.." ("..formatted_time..")")
                 end
                 for i, racer in ipairs(data.racers) do
                     table.insert(buildMessage, "[DNF] "..racer.name)
