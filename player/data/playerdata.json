@@ -1,18 +1,1 @@
-[{
-    "identifiers":{
-      "discord":"151507543657545728"
-    },
-    "permissions":{
-      "admin":true,
-      "god":true,
-      "mod":true
-    },
-    "whitelisted":true,
-    "lastPlayed":1678951291
-  },{
-    "identifiers":{
-      "discord":"534473265574314003"
-    },
-    "permissions":[],
-    "lastPlayed":1678962304
-  }]
+[]

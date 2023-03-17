@@ -19,12 +19,13 @@ Exports.player.registerCommand("startrace", function(player, args)
                 maxtime = validRace.maxtime,
                 maxdistance = validRace.maxdistance,
                 startingalert = validRace.startingalert,
+                minplayers = validRace.minplayers or nil,
                 racers = {player},
                 checkpoints = validRace.checkpoints,
                 progress = {[player.connection] = 1},
                 finished = {},
             }
-            player:SendSystemMessage("You started the race " .. calledRace)
+            player:SendSystemMessage("You started the race " .. calledRace .. " (minium racers:"..(validRace.minplayers or "1")..")")
         else
             player:SendSystemMessage("Race is already in progress")
         end

@@ -6,20 +6,33 @@ local function onUpdate(Delta)
     if SyncTime > 1 then
         SyncTime = SyncTime - 1
         for raceName, data in pairs(RaceData) do
+            if not data.origdelay then data.origdelay = data.startdelay end
+            if not data.timeout then data.timeout = 0 end
             if data.startdelay > 0 then
-                data.startdelay = data.startdelay - 1
-                if data.startdelay <= 0 then
-                    for _, racer in ipairs(data.racers) do
-                        racer:SendSystemMessage("The race has started!")
-                        data.starttime = os.clock()
-                    end
-                else
-                    for _, alert in pairs(data.startingalert) do
-                        if alert == data.startdelay then
-                            for _, racer in ipairs(data.racers) do
-                                racer:SendSystemMessage("Race starting in " .. tostring(math.ceil(data.startdelay)) .. " seconds...")
+                if not data.minplayers or (#data.racers >= data.minplayers) then
+                    data.startdelay = data.startdelay - 1
+                    if data.startdelay <= 0 then
+                        for _, racer in ipairs(data.racers) do
+                            racer:SendSystemMessage("The race has started!")
+                            data.starttime = os.clock()
+                        end
+                    else
+                        for _, alert in pairs(data.startingalert) do
+                            if alert == data.startdelay then
+                                for _, racer in ipairs(data.racers) do
+                                    racer:SendSystemMessage("Race starting in " .. tostring(math.ceil(data.startdelay)) .. " seconds...")
+                                end
                             end
                         end
+                    end
+                else
+                    data.startdelay = data.origdelay
+                    data.timeout = data.timeout + 1
+                    if data.timeout >= data.maxtime then
+                        for _, racer in ipairs(data.racers) do
+                            racer:SendSystemMessage("There was not enough racers for " .. raceName .. " ("..#data.racers.."/"..data.minplayers..")")
+                        end
+                        RaceData[raceName] = nil
                     end
                 end
             end
