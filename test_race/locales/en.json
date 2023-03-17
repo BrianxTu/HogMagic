@@ -1,0 +1,15 @@
+{
+    "Commands":{
+        "provide_rname":"Provide a race name!",
+        "start_notify":"You started the race %s (minimum racers: %s)",
+        "race_already":"Race is already in progress",
+        "rnot_exist":"Race does not exist",
+        "alreadyin":"You are already in a race!",
+        "joined_race":"You have joined the race: %s",
+        "rnot_started":"Race does not exist or has not started",
+        "left_race":"You have left the race: %s",
+        "notin":"You are not in a race",
+        "toptimes":"</><hufflepuff>Top %s times for %s: ",
+        "tomany_times":"That's to many to list!"
+    }
+}

@@ -1,6 +1,6 @@
 Exports.player.registerCommand("startrace", function(player, args)
     if #args == 0 or args[1] == nil then
-        player:SendSystemMessage("Provide a race name!")
+        player:SendSystemMessage(Locale.Commands.provide_rname)
         return
     end
     local calledRace = args[1]:lower()
@@ -25,18 +25,18 @@ Exports.player.registerCommand("startrace", function(player, args)
                 progress = {[player.connection] = 1},
                 finished = {},
             }
-            player:SendSystemMessage("You started the race " .. calledRace .. " (minium racers:"..(validRace.minplayers or "1")..")")
+            player:SendSystemMessage(string.format(Locale.Commands.start_notify,calledRace,(validRace.minplayers or "1")))
         else
-            player:SendSystemMessage("Race is already in progress")
+            player:SendSystemMessage(Locale.Commands.race_already)
         end
     else
-        player:SendSystemMessage("Race does not exist")
+        player:SendSystemMessage(Locale.Commands.rnot_exist)
     end
 end)
 
 Exports.player.registerCommand("joinrace", function(player, args)
     if #args == 0 or args[1] == nil then
-        player:SendSystemMessage("Provide a race name!")
+        player:SendSystemMessage(Locale.Commands.provide_rname)
         return
     end
     local calledRace = args[1]:lower()
@@ -56,16 +56,19 @@ Exports.player.registerCommand("joinrace", function(player, args)
                 end
             end
             if inRace then
-                player:SendSystemMessage("You are already in a race!")
+                player:SendSystemMessage(Locale.Commands.alreadyin)
                 return
             end
         end
-        table.insert(RaceData[calledRace].racers, player)
-        RaceData[calledRace].progress[player.connection] = 1
-
-        player:SendSystemMessage("You have joined the race: " .. calledRace)
+        if not data.starttime then
+            table.insert(RaceData[calledRace].racers, player)
+            RaceData[calledRace].progress[player.connection] = 1
+            player:SendSystemMessage(string.format(Locale.Commands.joined_race, calledRace))
+        else
+            player:SendSystemMessage(Locale.Commands.race_already)
+        end
     else
-        player:SendSystemMessage("Race does not exist or has not started")
+        player:SendSystemMessage(Locale.Commands.rnot_started)
     end
 end)
 
@@ -75,7 +78,7 @@ Exports.player.registerCommand("leaverace", function(player, args)
             if v == player then
                 table.remove(data.racers, i)
                 data.progress[player.connection] = nil
-                player:SendSystemMessage("You have left the race: " .. raceName)
+                player:SendSystemMessage(string.format(Locale.Commands.left_race, raceName))
                 if #data.racers == 0 and #data.finished == 0 then
                     RaceData[raceName] = nil
                 end
@@ -86,7 +89,7 @@ Exports.player.registerCommand("leaverace", function(player, args)
             if v == player then
                 table.remove(data.racers, i)
                 data.progress[player.connection] = nil
-                player:SendSystemMessage("You have left the race: " .. raceName)
+                player:SendSystemMessage(string.format(Locale.Commands.left_race, raceName))
                 if #data.racers == 0 and #data.finished == 0 then
                     RaceData[raceName] = nil
                 end
@@ -94,5 +97,49 @@ Exports.player.registerCommand("leaverace", function(player, args)
             end
         end
     end
-    player:SendSystemMessage("You are not in a race")
+    player:SendSystemMessage(Locale.Commands.notin)
+end)
+
+Exports.player.registerCommand("racetimes", function(player, args)
+    if #args == 0 or args[1] == nil then
+        player:SendSystemMessage(Locale.Commands.provide_rname)
+        return
+    end
+    local calledRace = args[1]:lower()
+    table.remove(args, 1)
+    local validRace = nil
+    for i,v in pairs(Config.RaceSetup) do
+        if i:lower() == calledRace then
+            validRace = i
+            break
+        end
+    end
+    if validRace then
+        local amount = tonumber(args[1]) or (Config.RaceTimesDefault)
+        if amount > Config.RaceTimesMax then
+            player:SendSystemMessage(Locale.Commands.tomany_times)
+            return
+        end
+        local data = LoadResourceData(_RESOURCE, "/data/racedata.json")
+        local times = {}
+        for time, racers in pairs(data[calledRace]) do
+            local minutes, seconds, milliseconds = time:match("(%d+):(%d+).(%d+)")
+            local totalMilliseconds = tonumber(minutes) * 60000 + tonumber(seconds) * 1000 + tonumber(milliseconds)
+            table.insert(times, {time = totalMilliseconds, formatted = time, racers = racers})
+        end
+        table.sort(times, function(a, b) return a.time < b.time end)
+
+        local buildMessage = {string.format(Locale.Commands.toptimes, amount, calledRace)}
+        for i = 1, amount, 1 do
+            local timeData = times[i]
+            if timeData then
+                local timeStr = timeData.formatted
+                local racersStr = table.concat(timeData.racers, ", ")
+                table.insert(buildMessage, timeStr .. " - " .. racersStr)
+            end
+        end
+        player:SendSystemMessage(table.concat(buildMessage, "</>\n<server>"))
+    else
+        player:SendSystemMessage(Locale.Commands.rnot_exist)
+    end
 end)

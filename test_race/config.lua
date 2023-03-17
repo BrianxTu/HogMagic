@@ -1,5 +1,8 @@
 Config = {}
 
+Config.RaceTimesDefault = 5
+Config.RaceTimesMax = 15
+
 Config.RaceSetup = {
 	["race1"] = {
         startdelay = 30, -- seconds till start

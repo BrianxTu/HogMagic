@@ -1,5 +1,27 @@
+local DATA_FILE = "/data/racedata.json"
 RaceData = {}
 local SyncTime = 0
+
+local function saveRaceData(raceInfo)
+    local race = raceInfo.race
+    local racers = raceInfo.racers
+    if Config.RaceSetup[race] then
+        local data = LoadResourceData(_RESOURCE, DATA_FILE)
+        if not data[race] then data[race] = {} end
+        for _, racer in ipairs(racers) do
+            local player = racer[1]
+            local time = racer[2]
+            if not data[race][time] then
+                data[race][time] = {player}
+            else
+                table.insert(data[race][time], player)
+            end
+        end
+        SaveResourceData(_RESOURCE, DATA_FILE, data)
+    else
+        return
+    end
+end
 
 local function onUpdate(Delta)
     SyncTime = SyncTime + Delta
@@ -63,14 +85,16 @@ local function onUpdate(Delta)
                     racer:SendSystemMessage("The race is over!")
                 end
                 local buildMessage = {string.format("</><hufflepuff>Results for %s:", raceName)}
+                local buildRaceData = {race = raceName, racers = {}}
                 for i, racer in ipairs(data.finished) do
                     local time = data.progress[racer.connection] - data.starttime
                     local seconds = math.floor(time)
                     local milliseconds = math.floor((time - seconds) * 1000)
                     local minutes = math.floor(seconds / 60)
                     seconds = seconds % 60
-                    local formatted_time = string.format("%02d:%02d:%02d", minutes, seconds, milliseconds)
+                    local formatted_time = string.format("%02d:%02d.%02d", minutes, seconds, milliseconds)
                     table.insert(buildMessage, "["..i.."] "..racer.name.." ("..formatted_time..")")
+                    table.insert(buildRaceData.racers, {racer.name, formatted_time})
                 end
                 for i, racer in ipairs(data.racers) do
                     table.insert(buildMessage, "[DNF] "..racer.name)
@@ -81,6 +105,7 @@ local function onUpdate(Delta)
                 for i, racer in ipairs(data.finished) do
                     racer:SendSystemMessage(table.concat(buildMessage, "</>\n<server>"))
                 end
+                saveRaceData(buildRaceData)
                 RaceData[raceName] = nil
             end
         end
