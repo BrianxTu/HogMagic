@@ -1,8 +1,12 @@
 # BrianTU's HogMagic
 
-This is a collection of modules for [Ministry of Mods](https://github.com/meta-hub/ministry-of-mods) written by BrianTU#0001
+This is a collection of modules for [Ministry of Mods](https://github.com/meta-hub/ministry-of-mods)
+
+These modules are written by BrianTU#0001
 
 ## Installation
+
+REQUIRED: [Ministry of Mods](https://github.com/meta-hub/ministry-of-mods)
 
 To install these modules, simply
 1. drag and drop them into the modules folder of Ministry of Mods
