@@ -212,6 +212,15 @@ local function onChat(player, message)
         onCommand(player, cmdName, args)
         return true
     end
+
+    if partyChat[player.connection] then
+        for _,member in pairs(party[partyChat[player.connection]].members) do
+            --if player ~= member then
+                member:SendSystemMessage("</><slytherin>[PARTY] "..player.name..":</><default> "..message.."</><server>")
+            --end
+        end
+        return true
+    end
 end
 
 local function onShutdown()
