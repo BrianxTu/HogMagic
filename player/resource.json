@@ -1,6 +1,7 @@
 [
     "config",
     "main",
+    "commands",
     "/commands/main",
     "/commands/emotes",
     "/commands/parties"
