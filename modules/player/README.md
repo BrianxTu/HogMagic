@@ -1,7 +1,6 @@
-# World Module
+# Player Module
 
-This is the module for all World related items. Written by BrianTU#0001
-You can find the latest version of Modules [here](https://github.com/BrianxTu/Modules)
+This is the module for all Player related items. Written by BrianTU#0001
 
 ## Setup
 

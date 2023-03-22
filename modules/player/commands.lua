@@ -68,7 +68,7 @@ local function onChat(player, message)
 
     local isCommand = message:sub(0, 1) == Config.CommandPrefix and #message > #Config.CommandPrefix
     if isCommand then
-        local args = message:splitT(" ")
+        local args = message:split()
         local cmdName = args[1]:sub(2)
         table.remove(args, 1)
         local cmd = registeredCommands[cmdName:lower()]
