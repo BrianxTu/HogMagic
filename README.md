@@ -7,7 +7,7 @@ This is a division of [Ministry of Magic](https://github.com/meta-hub/ministry-o
 
 ## For Users
 
-- Clone this repository into your `HogwartsLegacy/Server/plugins/` directory.
+- Clone this repository into your `HogWarpServer/plugins/` directory.
 - Check `setup.lua` to setup languages and modules that you would like loaded.
 - move all `dependencies` to the same folder `HogWarpServer.exe` is located at.
 - Start your server and observe the console. If no errors are present; the resource should now be running.
