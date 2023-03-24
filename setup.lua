@@ -3,7 +3,7 @@ Core = {}
 Core.Language = 'en'
 
 Core.MySQL = {
-    enabled = true,
+    enabled = false,
     database = "test",
     username = "root",
     password = nil,

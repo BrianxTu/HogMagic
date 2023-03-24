@@ -13,7 +13,7 @@ tp = require("library/socket/tp")
 ftp = require("library/socket/ftp")
 https = require("library/ssl/https")
 --smtp = require("library/socket/smtp") -- courtine issue
-
+lanes = require("library/lanes")
 require("library/dkjson")
 require("library/string")
 require("setup")
