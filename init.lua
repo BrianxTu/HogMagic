@@ -2,17 +2,17 @@
 _G._PATH = io.popen("cd"):read("*l")
 
 --[[Required]]
---socket = require("library/socket")
---ltn12 = require("library/ltn12")
---mime = require("library/mime")
---ssl = require("library/ssl")
---url = require("library/socket/url")
---headers = require("library/socket/headers")
---http = require("library/socket/http")
---tp = require("library/socket/tp")
---ftp = require("library/socket/ftp")
+socket = require("library/socket")
+ltn12 = require("library/ltn12")
+mime = require("library/mime")
+ssl = require("library/ssl")
+url = require("library/socket/url")
+headers = require("library/socket/headers")
+http = require("library/socket/http")
+tp = require("library/socket/tp")
+ftp = require("library/socket/ftp")
+https = require("library/ssl/https")
 --smtp = require("library/socket/smtp") -- courtine issue
---https = require("library/ssl/https")
 
 require("library/dkjson")
 require("library/string")
