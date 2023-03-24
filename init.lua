@@ -18,6 +18,13 @@ require("library/dkjson")
 require("library/string")
 require("setup")
 
+--[[MYSQL Setup]]
+if Core.MySQL.enabled then
+    local sql = require("luasql.mysql")
+    local env = assert(sql.mysql())
+    mysql = assert(env:connect(Core.MySQL.database, Core.MySQL.username, Core.MySQL.password, Core.MySQL.localhost))
+end
+
 --[[File Validation]]
 local function fileExists(path)
     local file = io.open(path, "r")
@@ -345,3 +352,8 @@ end
 for _,resourceDef in ipairs(Core.Modules) do
     loadResource(_G, resourceDef.name, resourceDef.options or {})
 end
+
+RegisterForEvent("shutdown", function()
+    mysql:close()
+    env:close()
+end)

@@ -3,6 +3,10 @@
 This is a resource to handle containerization and cross-resource communication for LUA mods in HogWarp.
 This is a division of [Ministry of Magic](https://github.com/meta-hub/ministry-of-mods) by BrianTU#0001 under the name "HogMagic"
 
+## Special Thanks
+Eliakoh#7680 <@161623718811009024> for the mysql.dll
+InternalErrorX#6942 "WindWakerX" <@442214351647014912> for current animations for emotes
+
 # Usage
 
 ## For Users
