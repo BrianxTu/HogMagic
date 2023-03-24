@@ -35,7 +35,7 @@ THE SOFTWARE.
 ===============================================================================
 ]]--
 
-local core = require "lanes.core"
+local core = require ("lanes.core")
 -- Lua 5.1: module() creates a global variable
 -- Lua 5.2: module() is gone
 -- almost everything module() does is done by require() anyway
