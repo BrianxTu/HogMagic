@@ -1,5 +1,6 @@
 --[[Globalize]]
 _G._PATH = io.popen("cd"):read("*l")
+package.cpath = _PATH.."\\dependencies\\?.dll;"..package.cpath
 
 --[[Required]]
 socket = require("library/socket")

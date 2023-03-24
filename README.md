@@ -12,8 +12,8 @@ InternalErrorX#6942 "WindWakerX" <@442214351647014912> for current animations fo
 ## For Users
 
 - Clone this repository into your `HogWarpServer/plugins/` directory.
-- Check `setup.lua` to setup languages and modules that you would like loaded.
-- move all `dependencies` to the same folder `HogWarpServer.exe` is located at.
+- Check `setup.lua` to setup languages, setup mysql and modules that you would like loaded.
+- move **ONLY** `lua54.dll` in `dependencies` to the same folder `HogWarpServer.exe` is located at.
 - Start your server and observe the console. If no errors are present; the resource should now be running.
 
 ## For Developers
